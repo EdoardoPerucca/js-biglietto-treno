@@ -1,34 +1,50 @@
 /*
-chiedere all'utente quanti km vuole percorrere e memorizza
-Chiedere l'età dell'utente e memorizza
-Calcola il prezzo del biglietto: somma € 0.21 ai km che vuole percorrere l'utente
-SE l'utente è minorenne applica lo sconto del 20%
-SE l'utente è over 65 anni applica lo sconto del 40%
+- chiedere all'utente quanti km vuole percorrere e memorizza
+- Chiedere l'età dell'utente e memorizza
+- Calcola il prezzo del biglietto (km * 0.21)
+? SE l'utente è < 18
+  ° prezzoFinale = prezzoBase - (prezzoBase / 100 * 20)
+ALTRIMENTI SE L'ETà è > 65
+  ° prezzoFinale = prezzoBase - prezzoBase * 0.4
+ALTRIMENTI
+  ° prezzoFinale - prezzoBase
+- formatta prezzoFinale con due decimali
+- stampa a schermo prezzoFinale in forma umana
 */
 
 
 
 
-let age = prompt("Quanti anni hai?")
-  console.log(age);
+let userAge = parseInt(prompt("Quanti anni hai?"))
 
-let percorrenza = parseInt(prompt ("Quanti km vuoi percorrere?"));
-  console.log(percorrenza);
+let tripKm = parseInt(prompt("Quanti km vuoi percorrere?"));
 
-let prezzoAlKilometro = 0.21;
+let pricePerKM = 0.21;
 
-let prezzoBigliettoSenzaSconto = prezzoAlKilometro * percorrenza;
-console.log(prezzoBigliettoSenzaSconto);
+let baseTicketPrice = tripKm * pricePerKM;
+
+let finalPrice;
+
+if(userAge < 18){
+  finalPrice = baseTicketPrice - baseTicketPrice / 100 * 20;
+
+} else if(userAge >= 65) {
+
+  finalPrice = baseTicketPrice - baseTicketPrice * 0.4;
+
+} else {
+
+  finalPrice = baseTicketPrice;
+}
 
 
-let offerta = "Tariffa Standard"
+finalPrice = finalPrice.toFixed(2);
 
-if (age == "minorenne") {
-    ((prezzoBigliettoSenzaSconto / 100) * 80);
-    
-   } else if (age == "over65") {
-    ((prezzoBigliettoSenzaSconto / 100) * 60);
-    
-   } else {
-    (prezzoBigliettoSenzaSconto);
-   }
+document.writeln(`
+  Ciao, devi percorrere ${tripKm} Km,
+  hai ${userAge} anni,
+  il tuo prezzo finale è di ${finalPrice}€
+  `);
+
+
+
